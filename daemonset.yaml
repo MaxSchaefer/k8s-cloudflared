@@ -38,6 +38,10 @@ spec:
             - name: credentials
               mountPath: /etc/cloudflared/credentials
               readOnly: true
+          securityContext:
+            runAsUser: 11111
+            runAsGroup: 11111
+            readOnlyRootFilesystem: true
           ports:
             - name: metrics
               containerPort: 3333
