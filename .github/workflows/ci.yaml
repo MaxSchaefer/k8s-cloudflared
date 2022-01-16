@@ -1,0 +1,22 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+
+  kube-score:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Get kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+          mv kustomize ~
+      - name: Get kube-score
+        run: |
+          curl -sL -o kube-score.tgz https://github.com/zegl/kube-score/releases/download/v1.13.0/kube-score_1.13.0_linux_amd64.tar.gz
+          tar xzf kube-score.tgz
+          mv kube-score ~
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run kube-score
+        run: ~/kustomize build . | ~/kube-score score --ignore-test pod-networkpolicy -
