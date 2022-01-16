@@ -1,0 +1,6 @@
+resources:
+  - configmap.yaml
+  - daemonset.yaml
+  - namespace.yaml
+  - sealedsecret.yaml
+  - serviceaccount.yaml
