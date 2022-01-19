@@ -45,7 +45,7 @@ spec:
           ports:
             - name: metrics
               containerPort: 3333
-          readinessProbe:
+          livenessProbe:
             httpGet:
               port: metrics
               path: /ready
